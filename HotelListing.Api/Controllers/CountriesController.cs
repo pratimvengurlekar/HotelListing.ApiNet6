@@ -16,7 +16,6 @@ namespace HotelListing.Api.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly HotelListingDbContext _context;
         private readonly IMapper _mapper;
         private readonly ICountriesRepository countriesRepository;
 

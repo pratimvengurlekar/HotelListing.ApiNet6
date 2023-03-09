@@ -19,6 +19,7 @@ builder.Services.AddDbContext<HotelListingDbContext>(options =>
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICountriesRepository,CountriesRepository>();
+builder.Services.AddScoped<IHotelsRepositoty,HotelsRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
