@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HotelListing.Api.Data.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelListing.Api.Data
 {
-    public class HotelListingDbContext : DbContext
+    public class HotelListingDbContext : IdentityDbContext<ApiUser>
     {
         public HotelListingDbContext(DbContextOptions options): base(options)
         {
@@ -15,53 +17,11 @@ namespace HotelListing.Api.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Country>().HasData(
-                new Country
-                {
-                    Id = 1,
-                    Name = "Jamaica",
-                    ShortName = "JM"
-                },
-                new Country
-                {
-                    Id = 2,
-                    Name = "Bahamas",
-                    ShortName = "BH"
-                },
-                new Country
-                {
-                    Id = 3,
-                    Name = "Cayman Island",
-                    ShortName = "CI"
-                }
-                );
-            modelBuilder.Entity<Hotel>().HasData(
-                new Hotel
-                {
-                    Id=1,
-                    Name="Sandal Resorts",
-                    Address="Neaogril",
-                    CountryId=1,
-                    Rating=4.5
-                },
-                new Hotel
-                {
-                    Id=2,
-                    Name="Comfort Suites",
-                    Address="Raghav nxt",
-                    CountryId=3,
-                    Rating=3
-                },
-                new Hotel
-                {
-                    Id = 3,
-                    Name = "Grand Palladium",
-                    Address = "Nassua",
-                    CountryId = 2,
-                    Rating = 4
-                }
-
-                );
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new CountryConfiguration());
+            modelBuilder.ApplyConfiguration(new HotelConfiguration());
+            
+            
         }
     }
 }
